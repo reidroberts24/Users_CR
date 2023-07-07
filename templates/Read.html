@@ -10,7 +10,7 @@
 <body>
     <div class="container-fluid">
         <nav class="navbar navbar-light bg-light justify-content-between">
-            <a class="navbar-brand">All Users!</a>
+            <a class="navbar-brand">Here are all our users!</a>
             <form action="/create/new" method="post">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add New User</button>
             </form>
@@ -20,20 +20,31 @@
             <thead class="text-warning">
                 <tr>
                     <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Full Name</th>
                     <th>Email</th>
                     <th>Created At</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for user in users %}
                     <tr>    
                         <td>{{user.id}}</td>
-                        <td>{{user.first_name}}</td>
-                        <td>{{user.last_name}}</td>
+                        <td>{{user.first_name}} {{user.last_name}}</td>
                         <td>{{user.email}}</td>
                         <td>{{user.created_at}}</td>
+                        <td>
+                            <div class="btn-group">
+                                <form action="/show/user/{{user.id}}">
+                                    <button class="btn btn-primary mr-2" type="submit">Show</button>
+                                </form>
+                                <form action="/update/user/{{user.id}}">
+                                    <button class="btn btn-primary mr-2" type="submit">Edit</button>
+                                </form>
+                                <form action="/delete/user/{{user.id}}", method="post">
+                                    <button class="btn btn-primary" type="submit">Delete</button>
+                                </form>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody> 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Update User</title>
+</head>
+<body>
+    <div class="container d-flex-col justify-content-left bg-dark text-white mt-4">
+        <h1 class="text-warning">Update user information!</h1>
+
+        <form action="/submit/update/user/{{user_id}}" method="post">
+            <input type="hidden" name="id" value="{{user_id}}">
+            <div class="form-group">
+                <label for="first">Update First Name: </label>
+                <input type="text" class="form-control" id="first" name="first" value="{{user.first_name}}">
+            </div>
+            <div class="form-group">
+                <label for="last">Update Last Name: </label>
+                <input type="text" class="form-control" id="last" name="last" value="{{user.last_name}}">
+            </div>
+            <div class="form-group">
+                <label for="email">Update Email: </label>
+                <input type="email" class="form-control" id="email" name="email" value="{{user.email}}">
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary mb-3">Update</button>
+                <a href="/" class="btn btn-primary mb-3">Return Home</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
