@@ -7,11 +7,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <title>Create New User</title>
 </head>
-<body>
+<body> 
     <div class="container d-flex-col justify-content-left bg-dark text-white">
         <h1 class="text-warning">Create new user!</h1>
 
         <form action="/user/new" method="post">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for msg in messages %}
+                        {{msg}}  
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <div class="form-group">
                 <label for="first">First: </label>
                 <input type="text" class="form-control" id="first" name="first">
@@ -22,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label for="email">Email: </label>
-                <input type="email" class="form-control" id="email" name="email">
+                <input type="text" class="form-control" id="email" name="email">
             </div>
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary mb-3">Submit</button>

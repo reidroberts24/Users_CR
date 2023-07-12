@@ -1,5 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-
+from flask import flash
+import re
 
 class User:
     def __init__(self, data):
@@ -54,3 +55,17 @@ class User:
         results = connectToMySQL('users').query_db(query, {"id": id})
         return results
     
+
+    @staticmethod
+    def validate_user(user):
+        is_valid = True
+        if len(user['first']) == 0 or len(user['last']) == 0 or len(user['email']) == 0:
+            flash("Cannot leave any fields blank.")
+            is_valid = False
+        
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
+        if not EMAIL_REGEX.match(user['email']):
+            flash("Invalid email address!")
+            is_valid = False
+
+        return is_valid

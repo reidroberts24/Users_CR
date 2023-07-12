@@ -15,7 +15,7 @@ def read_all():
     return redirect('/')
 
 ################# PAGE TO ADD NEW USER INFO TO THE TABLE #################
-@app.route('/create/new', methods=['POST'])
+@app.route('/create/new', methods=['GET', 'POST'])
 def create_new():
     return render_template('Create.html')
 
@@ -39,6 +39,9 @@ def add_user():
         "last": request.form["last"],
         "email": request.form["email"]
         }
+    if not User.validate_user(request.form):
+        return redirect('/create/new')
+    
     User.save(data)
     return redirect('/')
 
@@ -54,15 +57,12 @@ def update(user_id):
 
     User.update(data)
     return redirect(f'/show/user/{user_id}')
-
     
 
 ################# POST METHOD TO DELETE USER #################
-
-
 @app.route('/delete/user/<int:user_id>', methods=['POST'])
 def delete_user(user_id):
     User.delete(user_id)
-
-    
     return redirect('/')
+
+
